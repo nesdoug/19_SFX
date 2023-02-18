@@ -1,8 +1,9 @@
-#define ACCEL 0x20
-#define GRAVITY 0x50
+#define ACCEL 30
+#define DECEL 50
+#define GRAVITY 0x4c
 #define MAX_SPEED 0x240
 #define JUMP_VEL -0x600
-#define MAX_RIGHT 0xb000
+#define MAX_RIGHT 0x9000
 
 
 
@@ -46,6 +47,12 @@ unsigned int pseudo_scroll_x;
 unsigned char L_R_switch;
 unsigned int old_x;
 //unsigned int old_y;
+unsigned char temp_x;
+unsigned char temp_y;
+
+unsigned char map_loaded; //only load it once
+unsigned char temp_room;
+
 unsigned char song;
 #define MAX_SONGS 2
 enum {SONG_GAME, SONG_PAUSE};
@@ -167,10 +174,15 @@ const unsigned char * const Rooms[]= {
 void load_room(void);
 void draw_sprites(void);
 void movement(void);	
-void bg_collision(void);
 void draw_screen_R(void);
 void new_cmap(void);
-void bg_collision_sub(void);
-void bg_check_low(void);
+char bg_collision_sub(void);
+
+char bg_coll_L(void);
+char bg_coll_R(void);
+char bg_coll_U(void);
+char bg_coll_D(void);
+char bg_coll_D2(void);
+
 void change_song(void);
 void check_sfx(void);
